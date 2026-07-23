@@ -41,12 +41,21 @@ export const login = async () => {
         validateStatus: (status) => status >= 200 && status < 400,
       },
     );
-      console.log("Authenticated with Urja portal");
-      
+    console.log("Authenticated with Urja portal");
   } catch (error) {
     console.error("Failed to authenticate with Urja portal");
     throw error;
   }
+};
+
+export const searchMeters = async ({ page = 1, search = "" } = {}) => {
+  const response = await portalClient.get("/portal/meters/search", {
+    params: {
+      q: search,
+      page,
+    },
+  });
+  return response.data;
 };
 
 export default portalClient;
