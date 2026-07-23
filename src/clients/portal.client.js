@@ -67,4 +67,23 @@ export const getMeter = async (meterId) => {
   return parseMeterData(response.data);
 };
 
+export const getGeo = async (meterId) => {
+  const response = await portalClient.get(`/portal/meters/${meterId}/geo`);
+  return response.data;
+};
+
+export const getEnergy = async (meterId) => {
+  const response = await portalClient.get(`/portal/meters/${meterId}/energy`);
+  return response.data;
+};
+
+export const getTransformers = async ({ page = 1 } = {}) => {
+  const response = await portalClient.get("/portal/dts?page=1", {
+    params: {
+      page,
+    },
+  });
+  return response.data;
+};
+
 export default portalClient;

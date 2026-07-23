@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import app from "./app.js";
-import { login ,searchMeters,getMeter} from "./clients/portal.client.js";
+import { login ,searchMeters,getMeter ,getGeo,getEnergy,getTransformers} from "./clients/portal.client.js";
 
 dotenv.config();
 
@@ -8,7 +8,9 @@ const PORT = process.env.PORT;
 
 const startServer = async () => {
   try {
-    await login();
+      await login();
+      const t = await getTransformers();
+      console.log(t);
     app.listen(PORT, () => {
       console.log(`Server running on http://localhost:${PORT}`);
     });
