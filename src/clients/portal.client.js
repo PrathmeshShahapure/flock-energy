@@ -3,6 +3,7 @@ import { CookieJar } from "tough-cookie";
 import { wrapper } from "axios-cookiejar-support";
 import dotenv from "dotenv";
 import qs from "qs";
+import { parseMeterData } from "../utils/parseMeterData.js";
 
 dotenv.config();
 const jar = new CookieJar();
@@ -56,6 +57,14 @@ export const searchMeters = async ({ page = 1, search = "" } = {}) => {
     },
   });
   return response.data;
+};
+
+export const getMeter = async (meterId) => {
+  const response = await portalClient.get(
+    `/meters/${meterId}/__data.json?x-sveltekit-invalidated=001`,
+  );
+
+  return parseMeterData(response.data);
 };
 
 export default portalClient;
