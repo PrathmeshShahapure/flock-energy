@@ -63,7 +63,6 @@ export const getMeter = async (meterId) => {
   const response = await portalClient.get(
     `/meters/${meterId}/__data.json?x-sveltekit-invalidated=001`,
   );
-
   return parseMeterData(response.data);
 };
 
