@@ -1,0 +1,139 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Urja Meter Ops API",
+    "version": "1.0.0",
+    "description": "A REST API that exposes data from the legacy Urja Meter Ops portal."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/api/transformers": {
+      "get": {
+        "summary": "Get all transformers",
+        "tags": [
+          "Transformers"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of transformers"
+          }
+        }
+      }
+    },
+    "/api/meters": {
+      "get": {
+        "summary": "Get all meters",
+        "tags": [
+          "Meters"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Page number"
+          },
+          {
+            "in": "query",
+            "name": "search",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Search by meter id or serial number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of meters"
+          }
+        }
+      }
+    },
+    "/api/meters/{meterId}": {
+      "get": {
+        "summary": "Get meter details",
+        "tags": [
+          "Meters"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "meterId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Meter details"
+          }
+        }
+      }
+    },
+    "/api/meters/{meterId}/location": {
+      "get": {
+        "summary": "Get meter location",
+        "tags": [
+          "Meters"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "meterId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Meter location"
+          }
+        }
+      }
+    },
+    "/api/meters/{meterId}/energy": {
+      "get": {
+        "summary": "Get meter energy history",
+        "tags": [
+          "Meters"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "meterId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Energy readings"
+          }
+        }
+      }
+    }
+  },
+  "components": {},
+  "tags": []
+}
