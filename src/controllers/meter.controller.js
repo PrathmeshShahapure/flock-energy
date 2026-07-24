@@ -1,4 +1,9 @@
-import { getMeterss,getMeterById } from "../services/meter.service.js";
+import {
+  getMeterss,
+  getMeterById,
+  getMeterLocationService,
+  getMeterEnergyService,
+} from "../services/meter.service.js";
 
 export const getAllMeters = async (req, res) => {
   try {
@@ -18,10 +23,9 @@ export const getAllMeters = async (req, res) => {
 };
 
 export const getMeter = async (req, res) => {
-  try { 
-
+  try {
     const { meterId } = req.params;
-   console.log(meterId)
+    console.log(meterId);
     const meter = await getMeterById(meterId);
 
     res.status(200).json(meter);
@@ -32,3 +36,36 @@ export const getMeter = async (req, res) => {
     });
   }
 };
+
+export const getMeterLocation = async (req, res) => {
+  try {
+    const { meterId } = req.params;
+
+    const location = await getMeterLocationService(meterId);
+
+    res.status(200).json(location);
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Failed to fetch meter location",
+    });
+  }
+};
+
+export const getMeterEnergy = async (req, res) => {
+  try {
+    const { meterId } = req.params;
+
+    const energy = await getMeterEnergyService(meterId);
+
+    res.status(200).json(energy);
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Failed to fetch meter energy",
+    });
+  }
+};
+
